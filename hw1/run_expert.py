@@ -37,7 +37,7 @@ def main():
         import gym
         env = gym.make(args.envname)
         max_steps = args.max_timesteps or env.spec.timestep_limit
-
+        
         returns = []
         observations = []
         actions = []
@@ -67,6 +67,9 @@ def main():
 
         expert_data = {'observations': np.array(observations),
                        'actions': np.array(actions)}
+        ##my stuff
+        with open("rollout_data_" + args.expert_policy_file.split("/")[1], 'wb+') as f:
+            pickle.dump(expert_data, f)
 
 if __name__ == '__main__':
     main()
